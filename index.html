@@ -8,27 +8,28 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <style>
   :root {
-    /* Your True Brand Colors */
+    /* Rich, Deep Premium Palette */
     --navy: #1B3A6B;
     --navy-light: #2a5298;
-    --gold: #B8972E;
-    --gold-light: #d4af5a;
-    --bg-light: #f8f9fa;
-    --card-bg: #ffffff;
-    --text-main: #111827; 
-    --text-muted: #4B5563; 
+    --gold: #D4AF37; /* More Saturated Primary Gold */
+    --gold-light: #e0b943;
+    --bg-light: #fefefc;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --border-glow: rgba(184, 151, 46, 0.1);
+    --text-main: #111827; /* Dark Gray for Depth */
+    --text-muted: #4B5563; /* Deep Gray */
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
 
-  /* Continuously Moving Animated Background */
+  /* Animated Continuous Gradient Background */
   body {
     font-family: 'Outfit', sans-serif;
     color: var(--text-main);
     overflow-x: hidden;
     line-height: 1.6;
-    background: linear-gradient(-45deg, #f8f9fa, #eef2f6, #f0f4f8, #ffffff);
+    background: linear-gradient(-45deg, #fefefc, #fefefc, #fefefc);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
   }
@@ -39,39 +40,38 @@
     100% { background-position: 0% 50%; }
   }
 
-  /* NAV (Glassmorphism) */
+  /* NAV (Glassmorphism & Fixed Color) */
   nav {
     position: fixed; top: 0; width: 100%; z-index: 100;
     padding: 20px 40px;
     display: flex; justify-content: space-between; align-items: center;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(27, 58, 107, 0.1);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--border-glow);
   }
   .nav-logo {
     font-family: 'Playfair Display', serif;
     font-size: 1.6rem; font-weight: 800;
-    color: var(--navy); letter-spacing: 1px;
+    color: var(--navy); letter-spacing: 2px;
   }
   .nav-logo span { 
-    color: var(--gold);
+    color: var(--gold); /* Use Primary Gold for "Anantha" */
   }
   .nav-cta {
-    background: linear-gradient(45deg, var(--gold), #e0b943);
+    background: linear-gradient(45deg, var(--gold), var(--gold-light));
     color: #fff; border: none;
     padding: 10px 24px; border-radius: 30px;
     font-weight: 800; font-size: 0.9rem; text-transform: uppercase;
     cursor: pointer; text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 15px rgba(184, 151, 46, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
   }
   .nav-cta:hover {
-    transform: scale(1.08) translateY(-2px);
-    box-shadow: 0 8px 25px rgba(184, 151, 46, 0.5);
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(184, 151, 46, 0.3);
   }
 
-  /* FLOATING WHATSAPP BUTTON (Animated Pulse) */
+  /* FLOATING WHATSAPP BUTTON */
   .floating-wa {
     position: fixed;
     bottom: 30px; right: 30px;
@@ -88,7 +88,7 @@
     transition: transform 0.3s ease;
   }
   .floating-wa:hover {
-    transform: scale(1.15) rotate(10deg);
+    transform: scale(1.1);
   }
   @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
@@ -96,30 +96,24 @@
     100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
   }
 
-  /* HERO */
+  /* HERO (Shimmering Text & Animations) */
   .hero {
     min-height: 100vh;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     text-align: center;
-    padding: 150px 24px 60px;
+    padding: 140px 24px 60px;
     position: relative;
   }
   .hero-logo {
-    width: 140px; height: 140px;
+    width: 130px; height: 130px;
     border-radius: 50%;
-    border: 4px solid #fff;
-    box-shadow: 0 15px 35px rgba(27, 58, 107, 0.2);
+    border: 3px solid #fff;
+    box-shadow: 0 15px 35px rgba(27, 58, 107, 0.1);
     object-fit: cover;
     margin-bottom: 30px;
-    animation: floatingLogo 4s ease-in-out infinite;
+    animation: popIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
-  @keyframes floatingLogo {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
-  }
-
   .hero-tag {
     font-size: 0.9rem; letter-spacing: 5px;
     text-transform: uppercase; color: var(--gold);
@@ -127,12 +121,16 @@
     animation: fadeUp 1s ease 0.2s both;
   }
   .hero h1 {
-    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-size: clamp(3.2rem, 8vw, 6rem);
     font-weight: 800; line-height: 1.1;
-    letter-spacing: -1px;
+    letter-spacing: -2px;
     animation: fadeUp 1s ease 0.4s both;
     color: var(--navy);
   }
+  .text-gradient {
+    color: var(--navy);
+  }
+  /* Shimmering Text Animation */
   .text-gradient-accent {
     background: linear-gradient(to right, var(--gold), var(--gold-light), var(--gold));
     background-size: 200% auto;
@@ -158,9 +156,9 @@
     animation: fadeUp 1s ease 0.8s both;
   }
   .btn {
-    padding: 16px 40px; border-radius: 40px;
+    padding: 18px 40px; border-radius: 40px;
     text-decoration: none; font-weight: 700; font-size: 1.05rem;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative; overflow: hidden;
     display: inline-flex; align-items: center; gap: 10px;
   }
@@ -171,23 +169,22 @@
   .btn-primary:hover {
     background: var(--navy-light);
     box-shadow: 0 15px 35px rgba(27, 58, 107, 0.4);
-    transform: translateY(-5px) scale(1.02);
+    transform: translateY(-3px) scale(1.02);
   }
   .btn-outline {
-    border: 2px solid var(--navy); color: var(--navy);
+    border: 2px solid rgba(27, 58, 107, 0.2); color: var(--navy);
     background: transparent;
   }
   .btn-outline:hover {
-    background: var(--navy);
-    color: #fff;
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(27, 58, 107, 0.2);
+    border-color: var(--navy);
+    background: rgba(27, 58, 107, 0.03);
+    transform: translateY(-3px) scale(1.02);
   }
 
   /* SECTIONS */
   section { padding: 100px 24px; position: relative; }
   .container { max-width: 1200px; margin: 0 auto; }
-  .section-header { text-align: center; margin-bottom: 70px; }
+  .section-header { text-align: center; margin-bottom: 60px; }
   .section-header h2 {
     font-size: clamp(2.2rem, 5vw, 3.8rem);
     font-weight: 800; letter-spacing: -1px;
@@ -201,49 +198,51 @@
   
   .glass-card {
     background: var(--card-bg);
+    border: 1px solid var(--border-glow);
     border-radius: 24px; padding: 40px;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
     position: relative; overflow: hidden;
-    box-shadow: 0 10px 30px rgba(27, 58, 107, 0.05);
-    border: 1px solid rgba(27, 58, 107, 0.05);
+    box-shadow: 0 10px 30px rgba(184, 151, 46, 0.03);
   }
+  .glass-card::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+    transform: skewX(-20deg); transition: 0.5s;
+  }
+  .glass-card:hover::before { left: 150%; }
   .glass-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(27, 58, 107, 0.15);
-    border-color: var(--gold-light);
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(184, 151, 46, 0.3);
+    box-shadow: 0 25px 50px rgba(184, 151, 46, 0.1);
   }
   
   .glass-card h3 { font-size: 1.5rem; margin: 20px 0 15px; color: var(--navy); font-weight: 800;}
   .glass-card p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;}
-  
-  /* REAL SYMBOLS (3D Emojis with Shadows) */
-  .real-symbol {
-    font-size: 3.5rem;
-    display: inline-block;
-    filter: drop-shadow(0px 10px 8px rgba(0,0,0,0.15));
-    animation: floatIcon 4s ease-in-out infinite;
+  .icon-box {
+    width: 60px; height: 60px; border-radius: 15px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; 
+    background: rgba(184, 151, 46, 0.05);
+    border: 1px solid rgba(184, 151, 46, 0.1);
+    color: var(--gold);
   }
-  @keyframes floatIcon {
-    0% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(3deg); }
-    100% { transform: translateY(0px) rotate(0deg); }
-  }
+
+  /* WHY US SPECIFIC */
+  .why-card { padding: 30px; }
+  .why-card .icon-box { background: transparent; border: none; font-size: 2.8rem; justify-content: flex-start; width: auto; height: auto; margin-bottom: 10px; color: var(--gold);}
 
   /* PORTFOLIO SPECIFIC */
   .portfolio-img {
     height: 240px; border-radius: 16px; margin-bottom: 25px;
-    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    background: linear-gradient(45deg, var(--navy), var(--navy-light));
     display: flex; align-items: center; justify-content: center;
     font-family: 'Playfair Display', serif; font-size: 2rem; color: #fff; font-weight: 800;
     overflow: hidden; position: relative;
-    box-shadow: inset 0 0 50px rgba(0,0,0,0.2);
-    transition: transform 0.5s;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.03);
   }
-  .glass-card:hover .portfolio-img {
-    transform: scale(1.03);
-  }
-  .portfolio-img.tvs { background: linear-gradient(135deg, #0f2027, #2c5364); }
-  
+  .portfolio-img.tvs { background: linear-gradient(45deg, #0f2027, #2c5364); }
   .portfolio-link {
     display: inline-flex; align-items: center; gap: 10px;
     color: var(--gold); text-decoration: none; font-weight: 800;
@@ -256,12 +255,12 @@
   .price-card { text-align: center; padding: 60px 40px; }
   .price-card.featured {
     border: 2px solid var(--gold);
-    background: linear-gradient(180deg, #fffbf0, #ffffff);
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.05), rgba(255,255,255,1));
     transform: scale(1.05);
     z-index: 2;
-    box-shadow: 0 20px 50px rgba(184, 151, 46, 0.15);
+    box-shadow: 0 20px 50px rgba(184, 151, 46, 0.1);
   }
-  .price-card.featured:hover { transform: scale(1.08) translateY(-10px); }
+  .price-card.featured:hover { transform: scale(1.05) translateY(-10px); }
   .price-tier { font-size: 1rem; text-transform: uppercase; letter-spacing: 4px; color: var(--gold); font-weight: 800;}
   .price-amount { font-size: 4rem; font-weight: 800; margin: 25px 0; line-height: 1; color: var(--navy);}
   .price-amount span { font-size: 1.8rem; vertical-align: super; color: var(--text-muted); }
@@ -269,13 +268,14 @@
   .price-features li { padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--text-muted); display: flex; align-items: center; gap: 12px; font-size: 1.05rem; font-weight: 600;}
   .price-features li span { color: var(--gold); font-size: 1.2rem;}
 
-  /* CONTACT & SOCIAL */
+  /* CONTACT & SOCIAL & CENTERED FOOTER FIX */
+  #contact { padding-bottom: 80px; } /* Reduce Bottom Margin Space */
   .contact-wrapper {
-    background: #fff;
+    background: #FFFFFF;
     border-radius: 40px;
     padding: 80px 40px;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(27, 58, 107, 0.08);
+    box-shadow: 0 10px 40px rgba(27, 58, 107, 0.05);
     position: relative;
     overflow: hidden;
   }
@@ -287,10 +287,10 @@
     padding: 18px 35px; border-radius: 50px;
     font-size: 1.15rem; font-weight: 700; text-decoration: none;
     color: var(--navy);
-    background: #f8f9fa;
+    background: rgba(27, 58, 107, 0.05);
     border: 2px solid transparent;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.02);
   }
   .social-btn:hover { transform: translateY(-8px) scale(1.05); color: #fff; }
   .social-btn.insta:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
@@ -299,7 +299,15 @@
   .social-btn.email:hover { background: var(--navy); }
 
   /* SCROLL ANIMATIONS */
-  .reveal { opacity: 0; transform: translateY(60px); transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.8) rotate(-10deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(50px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* MOBILE RESPONSIVE */
@@ -315,6 +323,9 @@
 </head>
 <body>
 
+<div class="bg-glow"></div>
+<div class="bg-glow right"></div>
+
 <a href="https://wa.me/919148529970?text=Hi,%20I%20am%20interested%20in%20your%20digital%20services." class="floating-wa" target="_blank" aria-label="Chat on WhatsApp">
   <i class="fab fa-whatsapp"></i>
 </a>
@@ -327,10 +338,10 @@
 <section class="hero">
   <img src="https://i.img.it.com/YiwxUnuc/WhatsApp-Image-2026-04-20-at-19.52.50.jpg" alt="RC's Anantha Logo" class="hero-logo" />
   <div class="hero-tag">Premier Digital Agency</div>
-  <h1>Design that Commands <br/><span class="text-gradient-accent">Attention.</span></h1>
+  <h1 class="text-gradient">Design that Commands <br/><span class="text-gradient-accent">Attention.</span></h1>
   <p>We engineer premium websites, robust applications, and high-performance CRM systems for SMEs who refuse to blend in.</p>
   <div class="btn-group">
-    <a href="https://wa.me/919148529970" class="btn btn-primary" target="_blank">🚀 Start Your Project</a>
+    <a href="https://wa.me/919148529970" class="btn btn-primary" target="_blank"><i class="fab fa-whatsapp"></i> Start Your Project</a>
     <a href="#portfolio" class="btn btn-outline">View Our Work</a>
   </div>
 </section>
@@ -339,21 +350,21 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="hero-tag">Expertise</div>
-      <h2>Digital Dominance.</h2>
+      <h2 class="text-gradient">Digital Dominance.</h2>
     </div>
     <div class="grid-3">
       <div class="glass-card reveal">
-        <div class="real-symbol">🌐</div>
+        <div class="icon-box"><i class="fas fa-globe"></i></div>
         <h3>Immersive Websites</h3>
         <p>Ultra-fast, conversion-optimized digital experiences that position your brand as the industry leader.</p>
       </div>
       <div class="glass-card reveal" style="transition-delay: 0.1s">
-        <div class="real-symbol">📱</div>
+        <div class="icon-box"><i class="fas fa-mobile-alt"></i></div>
         <h3>Native Applications</h3>
         <p>Sleek, powerful mobile architectures designed for seamless user retention and operational efficiency.</p>
       </div>
       <div class="glass-card reveal" style="transition-delay: 0.2s">
-        <div class="real-symbol">📈</div>
+        <div class="icon-box"><i class="fas fa-chart-line"></i></div>
         <h3>Smart Infrastructure</h3>
         <p>Custom CRM and operational software that scales with your growth and automates the mundane.</p>
       </div>
@@ -365,26 +376,26 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="hero-tag">The Advantage</div>
-      <h2>Why Choose Us?</h2>
+      <h2 class="text-gradient">Why Choose Us?</h2>
     </div>
     <div class="grid-4">
-      <div class="glass-card reveal">
-        <div class="real-symbol">💼</div>
+      <div class="glass-card why-card reveal">
+        <div class="icon-box"><i class="fas fa-briefcase"></i></div>
         <h3>10 Years Experience</h3>
         <p>From Honda to Tata to TVS, we understand the real-world operational needs of growing businesses.</p>
       </div>
-      <div class="glass-card reveal" style="transition-delay: 0.1s">
-        <div class="real-symbol">⚡</div>
+      <div class="glass-card why-card reveal" style="transition-delay: 0.1s">
+        <div class="icon-box"><i class="fas fa-rocket"></i></div>
         <h3>Rapid Deployment</h3>
         <p>Your premium website goes live in 7–15 days. Uncompromising quality delivered on strict deadlines.</p>
       </div>
-      <div class="glass-card reveal" style="transition-delay: 0.2s">
-        <div class="real-symbol">🏥</div>
+      <div class="glass-card why-card reveal" style="transition-delay: 0.2s">
+        <div class="icon-box"><i class="fas fa-industry"></i></div>
         <h3>Industry Agnostic</h3>
         <p>Whether you run a clinic, dealership, or coaching center, we build custom solutions that fit perfectly.</p>
       </div>
-      <div class="glass-card reveal" style="transition-delay: 0.3s">
-        <div class="real-symbol">🤝</div>
+      <div class="glass-card why-card reveal" style="transition-delay: 0.3s">
+        <div class="icon-box"><i class="fas fa-headset"></i></div>
         <h3>Elite Support</h3>
         <p>We don't vanish after launch. Count on ongoing maintenance, rapid fixes, and strategic guidance.</p>
       </div>
@@ -396,20 +407,20 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="hero-tag">Case Studies</div>
-      <h2>Proven Excellence.</h2>
+      <h2 class="text-gradient">Proven Excellence.</h2>
     </div>
     <div class="grid-2">
       <div class="glass-card reveal">
         <div class="portfolio-img">RRP Corporate</div>
         <h3>RRP Enterprises</h3>
         <p>A sophisticated corporate presence engineered for B2B trust and streamlined client acquisition.</p>
-        <a href="https://rrpenterprises.co.in" class="portfolio-link" target="_blank">Explore Live Site →</a>
+        <a href="https://rrpenterprises.co.in" class="portfolio-link" target="_blank">Explore Live Site <i class="fas fa-arrow-right"></i></a>
       </div>
       <div class="glass-card reveal" style="transition-delay: 0.2s">
         <div class="portfolio-img tvs">Tirumala TVS</div>
         <h3>Tirumala TVS</h3>
         <p>High-performance dealership platform built for inventory showcasing and seamless test-drive conversions.</p>
-        <a href="https://tirumalatvs.in" class="portfolio-link" target="_blank">Explore Live Site →</a>
+        <a href="https://tirumalatvs.in" class="portfolio-link" target="_blank">Explore Live Site <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </div>
@@ -419,7 +430,7 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="hero-tag">Investment</div>
-      <h2>Transparent Value.</h2>
+      <h2 class="text-gradient">Transparent Value.</h2>
     </div>
     <div class="grid-3">
       <div class="glass-card price-card reveal">
@@ -432,12 +443,12 @@
           <li><span>✦</span> WhatsApp Integration</li>
           <li><span>✦</span> 7-Day Deployment</li>
         </ul>
-        <a href="https://wa.me/919148529970?text=I'm%20interested%20in%20the%20Starter%20package" class="btn btn-outline" style="width:100%; display:block; text-align:center;">Select Plan</a>
+        <a href="https://wa.me/919148529970" class="btn btn-outline" style="width:100%; display:block; text-align:center;">Select Plan</a>
       </div>
       
       <div class="glass-card price-card featured reveal" style="transition-delay: 0.1s">
         <div class="price-tier">Standard (Popular)</div>
-        <div class="price-amount"><span>₹</span>7,999</div>
+        <div class="price-amount" style="color:var(--text-main)"><span>₹</span>7,999</div>
         <p>For aggressive market expansion.</p>
         <ul class="price-features">
           <li><span>✦</span> Multi-Page Experience (3-5)</li>
@@ -445,7 +456,7 @@
           <li><span>✦</span> Technical SEO Foundation</li>
           <li><span>✦</span> 10-Day Deployment</li>
         </ul>
-        <a href="https://wa.me/919148529970?text=I'm%20interested%20in%20the%20Standard%20package" class="btn btn-primary" style="width:100%; display:block; text-align:center;">Select Plan</a>
+        <a href="https://wa.me/919148529970" class="btn btn-primary" style="width:100%; display:block; text-align:center;">Select Plan</a>
       </div>
 
       <div class="glass-card price-card reveal" style="transition-delay: 0.2s">
@@ -458,7 +469,7 @@
           <li><span>✦</span> Google Business Ecosystem</li>
           <li><span>✦</span> 15-Day Deployment</li>
         </ul>
-        <a href="https://wa.me/919148529970?text=I'm%20interested%20in%20the%20Growth%20package" class="btn btn-outline" style="width:100%; display:block; text-align:center;">Select Plan</a>
+        <a href="https://wa.me/919148529970" class="btn btn-outline" style="width:100%; display:block; text-align:center;">Select Plan</a>
       </div>
     </div>
   </div>
@@ -468,7 +479,7 @@
   <div class="container reveal">
     <div class="contact-wrapper">
       <div class="hero-tag">Let's Talk</div>
-      <h2 style="font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 20px;">Ready to Scale?</h2>
+      <h2 class="text-gradient" style="font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 20px;">Ready to Scale?</h2>
       <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto; font-size: 1.1rem;">Connect with us through any of the channels below to discuss your project requirements and vision.</p>
       
       <div class="social-links">
@@ -489,7 +500,7 @@
   </div>
 </section>
 
-<footer style="text-align: center; padding: 40px; border-top: 1px solid rgba(27, 58, 107, 0.1); color: var(--text-muted); font-size: 1rem;">
+<footer style="text-align: center; padding: 60px 40px; border-top: 1px solid rgba(184, 151, 46, 0.1); color: var(--text-muted); font-size: 1rem;">
   <div style="margin-bottom: 20px;">
     <img src="https://i.img.it.com/YiwxUnuc/WhatsApp-Image-2026-04-20-at-19.52.50.jpg" alt="RC's Anantha" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; filter: grayscale(100%); opacity: 0.6;">
   </div>
