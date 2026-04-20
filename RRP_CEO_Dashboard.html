@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RC's Anantha | Premier Digital Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+  :root {
+    --bg-dark: #050505;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --border-glow: rgba(255, 255, 255, 0.1);
+    --primary: #FFB800; /* Gold */
+    --accent-1: #FF3366; /* Magenta */
+    --accent-2: #00FFCC; /* Cyan */
+    --text-main: #FFFFFF;
+    --text-muted: #A0A0A0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* Animated Background Blob */
+  .bg-glow {
+    position: fixed;
+    top: -20%; left: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,51,102,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    animation: float 10s infinite alternate ease-in-out;
+  }
+  .bg-glow.right {
+    top: 40%; left: auto; right: -10%;
+    background: radial-gradient(circle, rgba(0,255,204,0.1) 0%, transparent 70%);
+    animation-delay: -5s;
+  }
+
+  @keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 50px) scale(1.2); }
+  }
+
+  /* NAV (Glassmorphism) */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 20px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(5, 5, 5, 0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 600;
+    color: var(--text-main); letter-spacing: 2px;
+  }
+  .nav-logo span { 
+    background: linear-gradient(90deg, var(--primary), var(--accent-1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .nav-cta {
+    background: linear-gradient(45deg, var(--primary), #FF8A00);
+    color: #000; border: none;
+    padding: 10px 24px; border-radius: 30px;
+    font-weight: 800; font-size: 0.9rem; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .nav-cta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 184, 0, 0.4);
+  }
+
+  /* FLOATING WHATSAPP BUTTON */
+  .floating-wa {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    width: 60px; height: 60px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    z-index: 999;
+    text-decoration: none;
+    animation: pulse 2s infinite;
+    transition: transform 0.3s ease;
+  }
+  .floating-wa:hover {
+    transform: scale(1.1);
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 140px 24px 60px;
+    position: relative;
+  }
+  .hero-logo {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box, 
+                linear-gradient(45deg, var(--accent-2), var(--accent-1)) border-box;
+    object-fit: cover;
+    margin-bottom: 30px;
+    animation: popIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .hero-tag {
+    font-size: 0.85rem; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--accent-2);
+    margin-bottom: 15px; font-weight: 600;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 800; line-height: 1.1;
+    letter-spacing: -1px;
+    animation: fadeUp 1s ease 0.4s both;
+  }
+  .text-gradient {
+    background: linear-gradient(to right, #FFFFFF, var(--text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .text-gradient-accent {
+    background: linear-gradient(to right, var(--accent-2), #0099FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: var(--text-muted);
+    max-width: 650px; margin: 30px auto;
+    font-weight: 300;
+    animation: fadeUp 1s ease 0.6s both;
+  }
+
+  /* BUTTONS */
+  .btn-group {
+    display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 1s ease 0.8s both;
+  }
+  .btn {
+    padding: 16px 36px; border-radius: 30px;
+    text-decoration: none; font-weight: 600; font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary {
+    background: var(--text-main); color: var(--bg-dark);
+  }
+  .btn-primary:hover {
+    background: var(--accent-2);
+    box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
+    transform: translateY(-2px);
+  }
+  .btn-outline {
+    border: 1px solid var(--border-glow); color: var(--text-main);
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(10px);
+  }
+  .btn-outline:hover {
+    border-color: var(--text-main);
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 24px; position: relative; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-header { text-align: center; margin-bottom: 60px; }
+  .section-header h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800; letter-spacing: -1px;
+    margin-top: 10px;
+  }
+
+  /* GRIDS & CARDS */
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; }
+  
+  .glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-glow);
+    border-radius: 20px; padding: 40px;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    position: relative; overflow: hidden;
+  }
+  .glass-card::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transform: skewX(-20deg); transition: 0.5s;
+  }
+  .glass-card:hover::before { left: 150%; }
+  .glass-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+  }
+  
+  .glass-card h3 { font-size: 1.4rem; margin: 15px 0; color: var(--text-main); line-height: 1.3;}
+  .glass-card p { color: var(--text-muted); font-size: 1rem; }
+  .icon-box {
+    width: 60px; height: 60px; border-radius: 15px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--accent-2);
+  }
+
+  /* WHY US SPECIFIC */
+  .why-card { padding: 30px; }
+  .why-card .icon-box { background: transparent; border: none; font-size: 2.5rem; justify-content: flex-start; width: auto; height: auto; margin-bottom: 10px; color: var(--primary);}
+
+  /* PORTFOLIO SPECIFIC */
+  .portfolio-img {
+    height: 220px; border-radius: 10px; margin-bottom: 20px;
+    background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #fff;
+    overflow: hidden; position: relative;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .portfolio-img.tvs { background: linear-gradient(45deg, #0f2027, #203a43, #2c5364); }
+  .portfolio-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--accent-2); text-decoration: none; font-weight: 600;
+    margin-top: 20px; text-transform: uppercase; font-size: 0.85rem;
+    letter-spacing: 1px; transition: 0.3s;
+  }
+  .portfolio-link:hover { gap: 12px; color: #fff; }
+
+  /* PRICING */
+  .price-card { text-align: center; padding: 50px 30px; }
+  .price-card.featured {
+    border: 1px solid var(--primary);
+    background: linear-gradient(180deg, rgba(255, 184, 0, 0.05), transparent);
+    transform: scale(1.05);
+    z-index: 2;
+  }
+  .price-card.featured:hover { transform: scale(1.05) translateY(-10px); }
+  .price-tier { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--primary); font-weight: 600;}
+  .price-amount { font-size: 3.5rem; font-weight: 800; margin: 20px 0; line-height: 1; }
+  .price-amount span { font-size: 1.5rem; vertical-align: super; color: var(--text-muted); }
+  .price-features { list-style: none; margin: 30px 0; text-align: left; }
+  .price-features li { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); display: flex; align-items: center; gap: 10px; font-size: 0.95rem;}
+  .price-features li i { color: var(--accent-2); font-size: 0.8rem;}
+
+  /* CONTACT & SOCIAL */
+  .contact-wrapper {
+    background: linear-gradient(180deg, var(--card-bg), transparent);
+    border: 1px solid var(--border-glow);
+    border-radius: 30px;
+    padding: 60px 40px;
+    text-align: center;
+  }
+  .social-links {
+    display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 40px;
+  }
+  .social-btn {
+    display: flex; align-items: center; gap: 12px;
+    padding: 15px 30px; border-radius: 50px;
+    font-size: 1.1rem; font-weight: 600; text-decoration: none;
+    color: var(--text-main);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+  }
+  .social-btn:hover { transform: translateY(-5px); }
+  .social-btn.insta:hover { background: #E1306C; border-color: #E1306C; }
+  .social-btn.linkedin:hover { background: #0077B5; border-color: #0077B5; }
+  .social-btn.whatsapp:hover { background: #25D366; border-color: #25D366; }
+  .social-btn.email:hover { background: var(--accent-1); border-color: var(--accent-1); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.8) rotate(-10deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(50px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 15px 20px; }
+    .hero { padding-top: 150px; }
+    .price-card.featured { transform: scale(1); }
+    .price-card.featured:hover { transform: translateY(-10px); }
+    .social-btn { width: 100%; justify-content: center; }
+    .floating-wa { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 28px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div class="bg-glow right"></div>
+
+<a href="https://wa.me/919148529970?text=Hi,%20I%20am%20interested%20in%20your%20digital%20services." class="floating-wa" target="_blank" aria-label="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<nav>
+  <div class="nav-logo">RC's <span>Anantha</span></div>
+  <a href="https://wa.me/919148529970?text=Hi,%20I%20want%20a%20free%20consultation" class="nav-cta" target="_blank">Book Consult</a>
+</nav>
+
+<section class="hero">
+  <img src="https://i.img.it.com/YiwxUnuc/WhatsApp-Image-2026-04-20-at-19.52.50.jpg" alt="RC's Anantha Logo" class="hero-logo" />
+  <div class="hero-tag">Premier Digital Agency</div>
+  <h1 class="text-gradient">Design that Commands <br/><span class="text-gradient-accent">Attention.</span></h1>
+  <p>We engineer premium websites, robust applications, and high-performance CRM systems for SMEs who refuse to blend in.</p>
+  <div class="btn-group">
+    <a href="https://wa.me/919148529970" class="btn btn-primary" target="_blank"><i class="fab fa-whatsapp"></i> Start Your Project</a>
+    <a href="#portfolio" class="btn btn-outline">View Our Work</a>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="hero-tag">Expertise</div>
+      <h2 class="text-gradient">Digital Dominance.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="glass-card reveal">
+        <div class="icon-box"><i class="fas fa-globe"></i></div>
+        <h3>Immersive Websites</h3>
+        <p>Ultra-fast, conversion-optimized digital experiences that position your brand as the industry leader.</p>
+      </div>
+      <div class="glass-card reveal" style="transition-delay: 0.1s">
+        <div class="icon-box"><i class="fas fa-mobile-alt"></i></div>
+        <h3>Native Applications</h3>
+        <p>Sleek, powerful mobile architectures designed for seamless user retention and operational efficiency.</p>
+      </div>
+      <div class="glass-card reveal" style="transition-delay: 0.2s">
+        <div class="icon-box"><i class="fas fa-chart-line"></i></div>
+        <h3>Smart Infrastructure</h3>
+        <p>Custom CRM and operational software that scales with your growth and automates the mundane.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why-us">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="hero-tag">The Advantage</div>
+      <h2 class="text-gradient">Why Choose Us?</h2>
+    </div>
+    <div class="grid-4">
+      <div class="glass-card why-card reveal">
+        <div class="icon-box"><i class="fas fa-briefcase"></i></div>
+        <h3>10 Years Experience</h3>
+        <p>From Honda to Tata to TVS, we understand the real-world operational needs of growing businesses.</p>
+      </div>
+      <div class="glass-card why-card reveal" style="transition-delay: 0.1s">
+        <div class="icon-box"><i class="fas fa-rocket"></i></div>
+        <h3>Rapid Deployment</h3>
+        <p>Your premium website goes live in 7–15 days. Uncompromising quality delivered on strict deadlines.</p>
+      </div>
+      <div class="glass-card why-card reveal" style="transition-delay: 0.2s">
+        <div class="icon-box"><i class="fas fa-industry"></i></div>
+        <h3>Industry Agnostic</h3>
+        <p>Whether you run a clinic, dealership, or coaching center, we build custom solutions that fit perfectly.</p>
+      </div>
+      <div class="glass-card why-card reveal" style="transition-delay: 0.3s">
+        <div class="icon-box"><i class="fas fa-headset"></i></div>
+        <h3>Elite Support</h3>
+        <p>We don't vanish after launch. Count on ongoing maintenance, rapid fixes, and strategic guidance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="hero-tag">Case Studies</div>
+      <h2 class="text-gradient">Proven Excellence.</h2>
+    </div>
+    <div class="grid-2">
+      <div class="glass-card reveal">
+        <div class="portfolio-img">RRP Corporate</div>
+        <h3>RRP Enterprises</h3>
+        <p>A sophisticated corporate presence engineered for B2B trust and streamlined client acquisition.</p>
+        <a href="https://rrpenterprises.co.in" class="portfolio-link" target="_blank">Explore Live Site <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="glass-card reveal" style="transition-delay: 0.2s">
+        <div class="portfolio-img tvs">Tirumala TVS</div>
+        <h3>Tirumala TVS</h3>
+        <p>High-performance dealership platform built for inventory showcasing and seamless test-drive conversions.</p>
+        <a href="https://tirumalatvs.in" class="portfolio-link" target="_blank">Explore Live Site <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="hero-tag">Investment</div>
+      <h2 class="text-gradient">Transparent Value.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="glass-card price-card reveal">
+        <div class="price-tier">Starter</div>
+        <div class="price-amount"><span>₹</span>3,999</div>
+        <p>The foundation for digital visibility.</p>
+        <ul class="price-features">
+          <li><i class="fas fa-check"></i> High-Converting Landing Page</li>
+          <li><i class="fas fa-check"></i> Mobile-First Architecture</li>
+          <li><i class="fas fa-check"></i> WhatsApp Integration</li>
+          <li><i class="fas fa-check"></i> 7-Day Deployment</li>
+        </ul>
+        <a href="https://wa.me/919148529970?text=I'm%20interested%20in%20the%20Starter%20package" class="btn btn-outline" style="width:100%; display:block; text-align:center;">Select Plan</a>
+      </div>
+      
+      <div class="glass-card price-card featured reveal" style="transition-delay: 0.1s">
+        <div class="price-tier">Standard (Popular)</div>
+        <div class="price-amount" style="color:var(--text-main)"><span>₹</span>7,999</div>
+        <p>For aggressive market expansion.</p>
+        <ul class="price-features">
+          <li><i class="fas fa-check"></i> Multi-Page Experience (3-5)</li>
+          <li><i class="fas fa-check"></i> Lead Generation Forms</li>
+          <li><i class="fas fa-check"></i> Technical SEO Foundation</li>
+          <li><i class="fas fa-check"></i> 10-Day Deployment</li>
+        </ul>
+        <a href="https://wa.me/919148529970?text=I'm%20interested%20in%20the%20Standard%20package" class="btn btn-primary" style="width:100%; display:block; text-align:center;">Select Plan</a>
+      </div>
+
+      <div class="glass-card price-card reveal" style="transition-delay: 0.2s">
+        <div class="price-tier">Growth</div>
+        <div class="price-amount"><span>₹</span>12,999</div>
+        <p>The complete digital takeover.</p>
+        <ul class="price-features">
+          <li><i class="fas fa-check"></i> Complete Custom Architecture</li>
+          <li><i class="fas fa-check"></i> Advanced SEO & Analytics</li>
+          <li><i class="fas fa-check"></i> Google Business Ecosystem</li>
+          <li><i class="fas fa-check"></i> 15-Day Deployment</li>
+        </ul>
+        <a href="https://wa.me/919148529970?text=I'm%20interested%20in%20the%20Growth%20package" class="btn btn-outline" style="width:100%; display:block; text-align:center;">Select Plan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container reveal">
+    <div class="contact-wrapper">
+      <div class="hero-tag">Let's Talk</div>
+      <h2 class="text-gradient" style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;">Ready to Scale?</h2>
+      <p style="color: var(--text-muted); max-width: 500px; margin: 20px auto 0;">Connect with us through any of the channels below to discuss your project requirements and vision.</p>
+      
+      <div class="social-links">
+        <a href="https://www.instagram.com/rc_anantha?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="social-btn insta" target="_blank">
+          <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a href="https://www.linkedin.com/company/r-c-s-anantha/" class="social-btn linkedin" target="_blank">
+          <i class="fab fa-linkedin-in"></i> LinkedIn
+        </a>
+        <a href="https://wa.me/919148529970" class="social-btn whatsapp" target="_blank">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        <a href="mailto:chandanofficial23@gmail.com" class="social-btn email">
+          <i class="far fa-envelope"></i> Email Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="text-align: center; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.9rem;">
+  <div style="margin-bottom: 15px;">
+    <img src="https://i.img.it.com/YiwxUnuc/WhatsApp-Image-2026-04-20-at-19.52.50.jpg" alt="RC's Anantha" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; filter: grayscale(100%); opacity: 0.5;">
+  </div>
+  <p>© 2026 <span style="color: var(--primary); font-weight: 600;">RC's Anantha</span>. A unit of RRP Enterprises. All rights reserved.</p>
+</footer>
+
+<script>
+  // Smooth Scroll Reveal Animation
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // Runs once per element
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
