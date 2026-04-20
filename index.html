@@ -8,14 +8,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <style>
   :root {
-    --bg-dark: #050505;
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --border-glow: rgba(255, 255, 255, 0.1);
-    --primary: #FFB800; /* Gold */
-    --accent-1: #FF3366; /* Magenta */
-    --accent-2: #00FFCC; /* Cyan */
-    --text-main: #FFFFFF;
-    --text-muted: #A0A0A0;
+    --bg-light: #FAFAFA;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --border-glow: rgba(0, 0, 0, 0.06);
+    --primary: #D4AF37; /* Elegant Gold */
+    --accent-1: #E11D48; /* Rose */
+    --accent-2: #2563EB; /* Royal Blue */
+    --text-main: #111827; /* Near Black */
+    --text-muted: #4B5563; /* Deep Gray */
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,18 +23,18 @@
 
   body {
     font-family: 'Outfit', sans-serif;
-    background-color: var(--bg-dark);
+    background-color: var(--bg-light);
     color: var(--text-main);
     overflow-x: hidden;
     line-height: 1.6;
   }
 
-  /* Animated Background Blob */
+  /* Animated Background Blob (Soft Pastels for Light Theme) */
   .bg-glow {
     position: fixed;
     top: -20%; left: -10%;
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(255,51,102,0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
     border-radius: 50%;
     filter: blur(80px);
     z-index: -1;
@@ -42,7 +42,7 @@
   }
   .bg-glow.right {
     top: 40%; left: auto; right: -10%;
-    background: radial-gradient(circle, rgba(0,255,204,0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(225, 29, 72, 0.05) 0%, transparent 70%);
     animation-delay: -5s;
   }
 
@@ -51,14 +51,14 @@
     100% { transform: translate(50px, 50px) scale(1.2); }
   }
 
-  /* NAV (Glassmorphism) */
+  /* NAV (Light Frosted Glass) */
   nav {
     position: fixed; top: 0; width: 100%; z-index: 100;
     padding: 20px 40px;
     display: flex; justify-content: space-between; align-items: center;
-    background: rgba(5, 5, 5, 0.7);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid var(--border-glow);
   }
   .nav-logo {
     font-family: 'Playfair Display', serif;
@@ -66,21 +66,22 @@
     color: var(--text-main); letter-spacing: 2px;
   }
   .nav-logo span { 
-    background: linear-gradient(90deg, var(--primary), var(--accent-1));
+    background: linear-gradient(90deg, var(--primary), #EA580C);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   .nav-cta {
-    background: linear-gradient(45deg, var(--primary), #FF8A00);
-    color: #000; border: none;
+    background: linear-gradient(45deg, var(--primary), #F59E0B);
+    color: #fff; border: none;
     padding: 10px 24px; border-radius: 30px;
     font-weight: 800; font-size: 0.9rem; text-transform: uppercase;
     cursor: pointer; text-decoration: none;
     transition: transform 0.3s, box-shadow 0.3s;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
   }
   .nav-cta:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 184, 0, 0.4);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
   }
 
   /* FLOATING WHATSAPP BUTTON */
@@ -120,17 +121,18 @@
   .hero-logo {
     width: 130px; height: 130px;
     border-radius: 50%;
-    border: 2px solid transparent;
-    background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box, 
-                linear-gradient(45deg, var(--accent-2), var(--accent-1)) border-box;
+    border: 3px solid transparent;
+    background: linear-gradient(var(--bg-light), var(--bg-light)) padding-box, 
+                linear-gradient(45deg, var(--accent-2), var(--primary)) border-box;
     object-fit: cover;
     margin-bottom: 30px;
     animation: popIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
   }
   .hero-tag {
     font-size: 0.85rem; letter-spacing: 4px;
     text-transform: uppercase; color: var(--accent-2);
-    margin-bottom: 15px; font-weight: 600;
+    margin-bottom: 15px; font-weight: 800;
     animation: fadeUp 1s ease 0.2s both;
   }
   .hero h1 {
@@ -138,14 +140,13 @@
     font-weight: 800; line-height: 1.1;
     letter-spacing: -1px;
     animation: fadeUp 1s ease 0.4s both;
+    color: var(--text-main);
   }
   .text-gradient {
-    background: linear-gradient(to right, #FFFFFF, var(--text-muted));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-main);
   }
   .text-gradient-accent {
-    background: linear-gradient(to right, var(--accent-2), #0099FF);
+    background: linear-gradient(to right, var(--accent-2), #0284C7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -153,7 +154,7 @@
     font-size: clamp(1.1rem, 2vw, 1.3rem);
     color: var(--text-muted);
     max-width: 650px; margin: 30px auto;
-    font-weight: 300;
+    font-weight: 400;
     animation: fadeUp 1s ease 0.6s both;
   }
 
@@ -170,21 +171,23 @@
     display: inline-flex; align-items: center; gap: 8px;
   }
   .btn-primary {
-    background: var(--text-main); color: var(--bg-dark);
+    background: var(--text-main); color: #fff;
+    box-shadow: 0 8px 20px rgba(17, 24, 39, 0.2);
   }
   .btn-primary:hover {
     background: var(--accent-2);
-    box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
     transform: translateY(-2px);
   }
   .btn-outline {
-    border: 1px solid var(--border-glow); color: var(--text-main);
-    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(0,0,0,0.1); color: var(--text-main);
+    background: rgba(255,255,255,0.5);
     backdrop-filter: blur(10px);
   }
   .btn-outline:hover {
     border-color: var(--text-main);
-    background: rgba(255,255,255,0.05);
+    background: var(--text-main);
+    color: #fff;
   }
 
   /* SECTIONS */
@@ -209,17 +212,18 @@
     backdrop-filter: blur(10px);
     transition: all 0.4s ease;
     position: relative; overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.02);
   }
   .glass-card::before {
     content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
     transform: skewX(-20deg); transition: 0.5s;
   }
   .glass-card:hover::before { left: 150%; }
   .glass-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+    transform: translateY(-8px);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
   }
   
   .glass-card h3 { font-size: 1.4rem; margin: 15px 0; color: var(--text-main); line-height: 1.3;}
@@ -227,8 +231,9 @@
   .icon-box {
     width: 60px; height: 60px; border-radius: 15px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.8rem; background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+    font-size: 1.8rem; 
+    background: rgba(37, 99, 235, 0.05);
+    border: 1px solid rgba(37, 99, 235, 0.1);
     color: var(--accent-2);
   }
 
@@ -239,44 +244,46 @@
   /* PORTFOLIO SPECIFIC */
   .portfolio-img {
     height: 220px; border-radius: 10px; margin-bottom: 20px;
-    background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+    background: linear-gradient(45deg, #F3F4F6, #E5E7EB);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #fff;
+    font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #6B7280;
     overflow: hidden; position: relative;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(0,0,0,0.03);
   }
-  .portfolio-img.tvs { background: linear-gradient(45deg, #0f2027, #203a43, #2c5364); }
+  .portfolio-img.tvs { background: linear-gradient(45deg, #E0F2FE, #BAE6FD); color: #0369A1; }
   .portfolio-link {
     display: inline-flex; align-items: center; gap: 8px;
-    color: var(--accent-2); text-decoration: none; font-weight: 600;
+    color: var(--accent-2); text-decoration: none; font-weight: 700;
     margin-top: 20px; text-transform: uppercase; font-size: 0.85rem;
     letter-spacing: 1px; transition: 0.3s;
   }
-  .portfolio-link:hover { gap: 12px; color: #fff; }
+  .portfolio-link:hover { gap: 12px; color: var(--text-main); }
 
   /* PRICING */
   .price-card { text-align: center; padding: 50px 30px; }
   .price-card.featured {
     border: 1px solid var(--primary);
-    background: linear-gradient(180deg, rgba(255, 184, 0, 0.05), transparent);
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.05), rgba(255,255,255,1));
     transform: scale(1.05);
     z-index: 2;
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1);
   }
   .price-card.featured:hover { transform: scale(1.05) translateY(-10px); }
-  .price-tier { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--primary); font-weight: 600;}
-  .price-amount { font-size: 3.5rem; font-weight: 800; margin: 20px 0; line-height: 1; }
+  .price-tier { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--primary); font-weight: 800;}
+  .price-amount { font-size: 3.5rem; font-weight: 800; margin: 20px 0; line-height: 1; color: var(--text-main);}
   .price-amount span { font-size: 1.5rem; vertical-align: super; color: var(--text-muted); }
   .price-features { list-style: none; margin: 30px 0; text-align: left; }
-  .price-features li { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); display: flex; align-items: center; gap: 10px; font-size: 0.95rem;}
+  .price-features li { padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--text-muted); display: flex; align-items: center; gap: 10px; font-size: 0.95rem;}
   .price-features li i { color: var(--accent-2); font-size: 0.8rem;}
 
   /* CONTACT & SOCIAL */
   .contact-wrapper {
-    background: linear-gradient(180deg, var(--card-bg), transparent);
+    background: linear-gradient(180deg, #FFFFFF, transparent);
     border: 1px solid var(--border-glow);
     border-radius: 30px;
     padding: 60px 40px;
     text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
   }
   .social-links {
     display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 40px;
@@ -286,15 +293,15 @@
     padding: 15px 30px; border-radius: 50px;
     font-size: 1.1rem; font-weight: 600; text-decoration: none;
     color: var(--text-main);
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: #F3F4F6;
+    border: 1px solid #E5E7EB;
     transition: all 0.3s ease;
   }
-  .social-btn:hover { transform: translateY(-5px); }
+  .social-btn:hover { transform: translateY(-5px); color: #fff; }
   .social-btn.insta:hover { background: #E1306C; border-color: #E1306C; }
   .social-btn.linkedin:hover { background: #0077B5; border-color: #0077B5; }
   .social-btn.whatsapp:hover { background: #25D366; border-color: #25D366; }
-  .social-btn.email:hover { background: var(--accent-1); border-color: var(--accent-1); }
+  .social-btn.email:hover { background: var(--text-main); border-color: var(--text-main); }
 
   /* ANIMATIONS */
   @keyframes fadeUp {
@@ -498,11 +505,11 @@
   </div>
 </section>
 
-<footer style="text-align: center; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.9rem;">
+<footer style="text-align: center; padding: 40px; border-top: 1px solid rgba(0,0,0,0.05); color: var(--text-muted); font-size: 0.9rem;">
   <div style="margin-bottom: 15px;">
     <img src="https://i.img.it.com/YiwxUnuc/WhatsApp-Image-2026-04-20-at-19.52.50.jpg" alt="RC's Anantha" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; filter: grayscale(100%); opacity: 0.5;">
   </div>
-  <p>© 2026 <span style="color: var(--primary); font-weight: 600;">RC's Anantha</span>. A unit of RRP Enterprises. All rights reserved.</p>
+  <p>© 2026 <span style="color: var(--primary); font-weight: 800;">RC's Anantha</span>. A unit of RRP Enterprises. All rights reserved.</p>
 </footer>
 
 <script>
@@ -517,7 +524,7 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target); // Runs once per element
+        observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
