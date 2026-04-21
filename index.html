@@ -116,10 +116,12 @@
     font-size: 1.8rem; 
     font-weight: 800; 
     color: var(--navy); 
-    letter-spacing: 1px; 
+    letter-spacing: 0.5px; 
     text-shadow: 0 2px 4px rgba(27, 58, 107, 0.1);
+    white-space: nowrap; /* Prevents text breaking into two lines */
   }
-  .nav-logo-text span { color: var(--gold); text-shadow: 0 2px 4px rgba(212, 175, 55, 0.2); }
+  /* Controlled the exact gap using margin-left instead of a space character */
+  .nav-logo-text span { color: var(--gold); text-shadow: 0 2px 4px rgba(212, 175, 55, 0.2); margin-left: 3px; }
   
   /* Desktop Top Navigation Links */
   .nav-top-links {
@@ -142,8 +144,11 @@
     background: linear-gradient(45deg, var(--gold), var(--gold-light)); color: #fff; border: none;
     padding: 10px 24px; border-radius: 30px; font-weight: 800; font-size: 0.9rem; text-transform: uppercase;
     cursor: pointer; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s;
+    white-space: nowrap;
   }
   .nav-cta:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(184, 151, 46, 0.3); }
+  
+  .mobile-cta { display: none; } /* Hide the mobile button text on PC */
 
   /* MOBILE BOTTOM NAV (App-like feel) */
   .mobile-nav {
@@ -270,10 +275,24 @@
   .reveal { opacity: 0; transform: translateY(50px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* MOBILE RESPONSIVE TWEAKS */
+  /* --- SPECIFIC MOBILE FIXES FOR ALIGNMENT AND WRAPPING --- */
   @media (max-width: 768px) {
-    nav { padding: 15px 20px; }
+    nav { padding: 12px 16px; } /* Slightly tighter horizontal padding */
     .nav-top-links { display: none; } /* Hide tabs on mobile */
+    
+    /* Perfecting the Logo Area for Mobile */
+    .nav-logo-container { gap: 8px; } /* Tighter gap between image and text */
+    .nav-logo-img { width: 36px; height: 36px; } /* Slightly smaller logo image */
+    .nav-logo-text { 
+        font-size: 1.25rem; /* Smaller font so it fits */
+        letter-spacing: 0px; 
+    }
+    
+    /* Changing CTA button to "Talk to Us" to save horizontal space */
+    .desktop-cta { display: none; }
+    .mobile-cta { display: inline; }
+    .nav-cta { padding: 8px 16px; font-size: 0.8rem; }
+
     .hero { padding-top: 120px; padding-bottom: 40px; }
     .hero h1 { font-size: 2.8rem; }
     section { padding: 70px 20px; }
@@ -318,8 +337,7 @@
 <nav>
   <a href="#" class="nav-logo-container">
     <img src="https://i.img.it.com/YiwxUnuc/WhatsApp-Image-2026-04-20-at-19.52.50.jpg" alt="RC's Anantha Logo" class="nav-logo-img">
-    <div class="nav-logo-text">RC's <span>Anantha</span></div>
-  </a>
+    <div class="nav-logo-text">RC's<span style="margin-left: 4px;">Anantha</span></div> </a>
   
   <div class="nav-top-links">
     <a href="#services">Services</a>
@@ -329,7 +347,9 @@
     <a href="#contact">Contact</a>
   </div>
 
-  <a href="https://wa.me/919148529970?text=Hi,%20I%20want%20a%20free%20consultation" class="nav-cta" target="_blank">Consult for Demo</a>
+  <a href="https://wa.me/919148529970?text=Hi,%20I%20want%20a%20free%20consultation" class="nav-cta" target="_blank">
+    <span class="desktop-cta">Consult for Demo</span>
+    <span class="mobile-cta">Talk to Us</span> </a>
 </nav>
 
 <div class="mobile-nav">
