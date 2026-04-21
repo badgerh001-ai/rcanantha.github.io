@@ -82,7 +82,7 @@
     font-size: 1.5rem; color: var(--text-muted);
     cursor: pointer; transition: color 0.3s;
   }
-  .popup-close:hover { color: var(--accent-1); }
+  .popup-close:hover { color: var(--navy); }
   .popup-logo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
   .popup-content h2 { color: var(--navy); font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 10px; }
   .popup-content p { color: var(--text-muted); margin-bottom: 25px; font-size: 1.05rem; }
@@ -90,15 +90,54 @@
   /* NAV */
   nav {
     position: fixed; top: 0; width: 100%; z-index: 100;
-    padding: 20px 40px;
+    padding: 15px 40px;
     display: flex; justify-content: space-between; align-items: center;
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-glow);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
   }
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 800; color: var(--navy); letter-spacing: 1px; }
-  .nav-logo span { color: var(--gold); }
+  .nav-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gold);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .nav-logo-text { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 1.8rem; 
+    font-weight: 800; 
+    color: var(--navy); 
+    letter-spacing: 1px; 
+    text-shadow: 0 2px 4px rgba(27, 58, 107, 0.1);
+  }
+  .nav-logo-text span { color: var(--gold); text-shadow: 0 2px 4px rgba(212, 175, 55, 0.2); }
+  
+  /* Desktop Top Navigation Links */
+  .nav-top-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+  .nav-top-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  .nav-top-links a:hover {
+    color: var(--navy);
+  }
+
   .nav-cta {
     background: linear-gradient(45deg, var(--gold), var(--gold-light)); color: #fff; border: none;
     padding: 10px 24px; border-radius: 30px; font-weight: 800; font-size: 0.9rem; text-transform: uppercase;
@@ -234,6 +273,7 @@
   /* MOBILE RESPONSIVE TWEAKS */
   @media (max-width: 768px) {
     nav { padding: 15px 20px; }
+    .nav-top-links { display: none; } /* Hide tabs on mobile */
     .hero { padding-top: 120px; padding-bottom: 40px; }
     .hero h1 { font-size: 2.8rem; }
     section { padding: 70px 20px; }
@@ -276,7 +316,19 @@
 </a>
 
 <nav>
-  <div class="nav-logo">RC's <span>Anantha</span></div>
+  <a href="#" class="nav-logo-container">
+    <img src="https://i.img.it.com/YiwxUnuc/WhatsApp-Image-2026-04-20-at-19.52.50.jpg" alt="RC's Anantha Logo" class="nav-logo-img">
+    <div class="nav-logo-text">RC's <span>Anantha</span></div>
+  </a>
+  
+  <div class="nav-top-links">
+    <a href="#services">Services</a>
+    <a href="#why-us">Why Us</a>
+    <a href="#portfolio">Work</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </div>
+
   <a href="https://wa.me/919148529970?text=Hi,%20I%20want%20a%20free%20consultation" class="nav-cta" target="_blank">Consult for Demo</a>
 </nav>
 
