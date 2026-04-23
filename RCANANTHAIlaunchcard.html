@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Official Launch | RC's Anantha</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+
+    :root {
+        --navy-bg: #1e3a5f;
+        --navy-dark: #11263d;
+        --gold-main: #dca743;
+        --gold-bright: #ebd288;
+        --white: #ffffff;
+        --text-dark: #1e293b;
+        --text-gray: #475569;
+        --bg-page: #f1f5f9;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: var(--bg-page);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* CONFETTI CANVAS */
+    #confetti-canvas {
+        position: fixed; top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none; z-index: 0;
+    }
+
+    /* CARD CONTAINER */
+    .launch-card {
+        width: 100%; max-width: 620px;
+        background: var(--white);
+        border-radius: 20px;
+        box-shadow: 0 25px 60px rgba(17, 38, 61, 0.15);
+        position: relative; z-index: 10;
+        overflow: hidden;
+        animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* HEADER */
+    .card-header {
+        background: linear-gradient(135deg, var(--navy-bg), var(--navy-dark));
+        padding: 50px 40px 80px;
+        position: relative; text-align: center; color: var(--white);
+    }
+
+    .card-header::after {
+        content: ''; position: absolute;
+        bottom: -1px; left: 0; width: 100%; height: 60px;
+        background: var(--white);
+        clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    }
+
+    .logo-container {
+        width: 110px; height: 110px;
+        background: var(--white); border-radius: 50%;
+        margin: 0 auto 20px; display: flex; justify-content: center; align-items: center;
+        border: 3px solid var(--gold-main);
+        box-shadow: 0 0 25px rgba(220, 167, 67, 0.3);
+        position: relative; z-index: 2;
+    }
+    .logo-container img { width: 85%; height: auto; border-radius: 50%;}
+
+    .badge {
+        display: inline-block; background: rgba(220, 167, 67, 0.15);
+        color: var(--gold-main); border: 1px solid var(--gold-main);
+        padding: 6px 18px; border-radius: 30px;
+        font-size: 0.75rem; font-weight: 700;
+        letter-spacing: 2px; text-transform: uppercase;
+        margin-bottom: 15px; position: relative; z-index: 2;
+    }
+
+    .main-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.4rem; line-height: 1.2;
+        margin-bottom: 8px; position: relative; z-index: 2;
+    }
+
+    .unit-text {
+        color: #94a3b8; font-size: 0.85rem; font-weight: 600;
+        letter-spacing: 1.5px; text-transform: uppercase; position: relative; z-index: 2;
+    }
+    .unit-highlight { color: var(--gold-main); }
+
+    /* CONTENT BODY */
+    .card-body { padding: 10px 40px 50px; background: var(--white); }
+
+    .founder-intro {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem; color: var(--navy-dark);
+        margin-bottom: 5px; font-weight: 700;
+    }
+
+    .founder-title {
+        font-size: 0.85rem; color: var(--gold-main);
+        text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
+        margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;
+    }
+
+    .story-line {
+        font-size: 1.1rem; font-weight: 700; color: var(--navy-dark);
+        margin-bottom: 15px; line-height: 1.5;
+    }
+
+    .story-text {
+        font-size: 0.95rem; line-height: 1.7; color: var(--text-gray); margin-bottom: 15px;
+    }
+
+    .story-climax {
+        font-size: 1rem; font-weight: 700; color: var(--gold-main);
+        font-style: italic; margin-bottom: 25px;
+    }
+
+    /* AI Highlight Box */
+    .highlight-box {
+        background: #f8fafc; border-left: 4px solid var(--gold-main);
+        padding: 25px 20px; border-radius: 0 12px 12px 0; margin: 35px 0;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    }
+
+    .ai-text {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.25rem; color: var(--navy-dark);
+        line-height: 1.4; margin-bottom: 12px; font-weight: 700;
+    }
+
+    .ai-subtext { font-size: 0.95rem; color: var(--text-gray); line-height: 1.6; }
+    .ai-bold { color: var(--navy-dark); font-weight: 700; }
+
+    /* SERVICES GRID - Updated to 1 column for descriptions */
+    .grid-title {
+        font-size: 0.85rem; color: var(--navy-bg); text-transform: uppercase;
+        letter-spacing: 2px; font-weight: 700; margin: 35px 0 20px; text-align: center;
+    }
+
+    .services-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+
+    .service-card {
+        background: var(--white); border: 1px solid #e2e8f0;
+        padding: 18px 20px; border-radius: 12px;
+        display: flex; align-items: center; gap: 18px;
+        transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    .service-card:hover {
+        border-color: var(--gold-main); transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(220, 167, 67, 0.1);
+    }
+
+    .service-icon { font-size: 1.8rem; line-height: 1; }
+    .service-text-wrap { display: flex; flex-direction: column; gap: 4px; }
+    .service-name { font-size: 1rem; font-weight: 700; color: var(--navy-dark); }
+    .service-desc { font-size: 0.85rem; color: var(--text-gray); line-height: 1.4; }
+
+    /* CONTACT & CTA */
+    .cta-wrapper { text-align: center; }
+
+    .primary-wa-btn {
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        background: var(--gold-main); color: var(--navy-dark);
+        text-decoration: none; padding: 16px 20px;
+        border-radius: 8px; font-weight: 700; font-size: 1.1rem;
+        transition: all 0.3s ease; margin-bottom: 15px; width: 100%;
+    }
+
+    .primary-wa-btn:hover { background: #e6b85c; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(220, 167, 67, 0.3); }
+    .primary-wa-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+    .contact-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px;
+    }
+
+    .contact-btn {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        background: #f8fafc; border: 1px solid #cbd5e1;
+        color: var(--navy-dark); text-decoration: none;
+        padding: 12px 10px; border-radius: 8px;
+        font-size: 0.85rem; font-weight: 600; transition: all 0.3s ease;
+    }
+
+    .contact-btn:hover { background: var(--navy-bg); border-color: var(--navy-bg); color: var(--white); }
+    .contact-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .portfolio-links { font-size: 0.85rem; color: var(--text-gray); }
+    .portfolio-links a { color: var(--navy-bg); text-decoration: none; font-weight: 700; transition: color 0.3s; }
+    .portfolio-links a:hover { color: var(--gold-main); text-decoration: underline; }
+
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<div class="launch-card">
+    
+    <div class="card-header">
+        <div class="logo-container">
+            <img src="https://i.img.it.com/YiwxUnuc/WhatsApp-Image-2026-04-20-at-19.52.50.jpg" alt="RC's Anantha Logo">
+        </div>
+        <div class="badge">Official Launch</div>
+        <h1 class="main-title">RC's Anantha</h1>
+        <div class="unit-text">A Unit of <span class="unit-highlight">RRP Enterprises</span></div>
+    </div>
+
+    <div class="card-body">
+        
+        <h2 class="founder-intro">I'm Chandan.</h2>
+        <div class="founder-title">FOUNDER — RC'S ANANTHA</div>
+        
+        <div class="story-line">Ten years. Three industry giants. One clear truth.</div>
+        
+        <p class="story-text">
+            I didn't start in tech. I started on the showroom floor — selling dreams on four wheels at <strong>Honda Cars</strong>, scaling EV ambitions at <strong>Tata Motors</strong>, and commanding territory strategy at <strong>TVS Motor Company</strong> as a Territory Manager.
+        </p>
+
+        <p class="story-text">
+            I watched brilliant businesses bleed customers — not because their product was weak, but because nobody could find them online. No presence. No trust. No pipeline.
+        </p>
+
+        <div class="story-climax">That gap became my purpose.</div>
+
+        <div class="highlight-box">
+            <div class="ai-text">
+                We are living in the most disruptive era in business history. AI is not the future — it is today's battlefield.
+            </div>
+            <div class="ai-subtext">
+                <span class="ai-bold">Businesses that don't automate, don't dominate. They disappear.</span><br><br>
+                At RC's Anantha, we don't just build websites. We engineer your entire digital ecosystem — where your website works while you sleep, AI bots qualify leads before you wake up, and your brand commands attention before a single word is spoken.
+            </div>
+        </div>
+
+        <div class="grid-title">Complete Digital Solutions</div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <div class="service-text-wrap">
+                    <div class="service-name">Premium Websites</div>
+                    <div class="service-desc">Built to convert, not just exist</div>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <div class="service-text-wrap">
+                    <div class="service-name">AI Bots & Automation</div>
+                    <div class="service-desc">Your 24/7 sales and support engine</div>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <div class="service-text-wrap">
+                    <div class="service-name">Smart CRM Systems</div>
+                    <div class="service-desc">Know every lead, close every deal</div>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <div class="service-text-wrap">
+                    <div class="service-name">Robust Mobile Apps</div>
+                    <div class="service-desc">Your business, in your customer's pocket</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-wrapper">
+            <a href="https://wa.me/919148529970?text=Hi%20Chandan,%20I%20saw%20your%20launch%20page.%20I'd%20like%20to%20discuss%20engineering%20my%20digital%20ecosystem." class="primary-wa-btn" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+                Talk to Us on WhatsApp
+            </a>
+
+            <div class="contact-grid">
+                <a href="tel:+919148529970" class="contact-btn">
+                    <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+                    Call Us
+                </a>
+                <a href="https://rcanantha.com" class="contact-btn" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    Website
+                </a>
+                <a href="https://linkedin.com/company/114974323" class="contact-btn" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://instagram.com/rc_anantha" class="contact-btn" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25zM12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+                    Instagram
+                </a>
+            </div>
+            
+            <div class="portfolio-links">
+                Live Projects: &nbsp; 
+                <a href="https://rrpenterprises.co.in" target="_blank">rrpenterprises.co.in</a> &nbsp;|&nbsp; 
+                <a href="https://tirumaltvs.in" target="_blank">tirumaltvs.in</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const confettiPieces = [];
+    const colors = ['#dca743', '#ebd288', '#1e3a5f', '#ffffff', '#94a3b8'];
+
+    for (let i = 0; i < 80; i++) {
+        confettiPieces.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height - canvas.height,
+            size: Math.random() * 8 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            speed: Math.random() * 2 + 1,
+            angle: Math.random() * 360,
+            spin: Math.random() * 0.2 - 0.1
+        });
+    }
+
+    function animateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confettiPieces.forEach(p => {
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.angle);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+            ctx.restore();
+
+            p.y += p.speed;
+            p.angle += p.spin;
+
+            if (p.y > canvas.height) {
+                p.y = -20;
+                p.x = Math.random() * canvas.width;
+            }
+        });
+        requestAnimationFrame(animateConfetti);
+    }
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+
+    animateConfetti();
+</script>
+
+</body>
+</html>
