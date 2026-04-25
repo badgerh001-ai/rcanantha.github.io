@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>RC's Anantha | Premier Digital Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+:root {
+  --navy: #1B3A6B;
+  --navy-dark: #0e2047;
+  --navy-light: #2a5298;
+  --gold: #C9A84C;
+  --gold-light: #e0c46a;
+  --gold-pale: #FDF8EC;
+  --cream: #FAFAF8;
+  --white: #ffffff;
+  --text: #111827;
+  --muted: #6B7280;
+  --border: rgba(201,168,76,0.2);
+  --shadow-navy: rgba(27,58,107,0.12);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+
+body{
+  font-family:'Outfit',sans-serif;
+  color:var(--text);
+  background:var(--cream);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+
+/* ── POPUP ─────────────────────────────── */
+.popup-overlay{
+  position:fixed;inset:0;
+  background:rgba(14,32,71,0.7);
+  backdrop-filter:blur(10px);
+  z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.4s ease;
+  padding:20px;
+}
+.popup-overlay.active{opacity:1;pointer-events:auto;}
+.popup-box{
+  background:#fff;border-radius:20px;
+  padding:40px 32px;max-width:420px;width:100%;
+  text-align:center;position:relative;
+  transform:scale(0.9) translateY(20px);
+  transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+  box-shadow:0 30px 60px rgba(14,32,71,0.25);
+  border:1.5px solid var(--border);
+}
+.popup-overlay.active .popup-box{transform:scale(1) translateY(0);}
+.popup-close{
+  position:absolute;top:14px;right:18px;
+  font-size:1.4rem;color:var(--muted);
+  cursor:pointer;transition:color 0.2s;
+  background:none;border:none;
+}
+.popup-close:hover{color:var(--navy);}
+.popup-logo{
+  width:80px;height:80px;border-radius:50%;
+  object-fit:cover;margin-bottom:18px;
+  border:2px solid var(--gold);
+  box-shadow:0 8px 20px var(--shadow-navy);
+}
+.popup-box h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;color:var(--navy);margin-bottom:10px;
+}
+.popup-box p{color:var(--muted);font-size:0.95rem;margin-bottom:22px;line-height:1.6;}
+.popup-btn{
+  display:block;width:100%;padding:14px;
+  background:var(--navy);color:#fff;
+  border:none;border-radius:10px;
+  font-family:'Outfit',sans-serif;
+  font-size:1rem;font-weight:700;cursor:pointer;
+  transition:background 0.2s;
+}
+.popup-btn:hover{background:var(--navy-light);}
+
+/* ── NAV ────────────────────────────────── */
+nav{
+  position:fixed;top:0;width:100%;z-index:100;
+  padding:12px 24px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(250,250,248,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 2px 20px rgba(27,58,107,0.06);
+}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo{
+  width:42px;height:42px;border-radius:50%;
+  object-fit:cover;border:2px solid var(--gold);
+  box-shadow:0 2px 8px var(--shadow-navy);
+  flex-shrink:0;
+}
+.nav-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:700;
+  color:var(--navy);letter-spacing:0.02em;
+  white-space:nowrap;
+}
+.nav-name span{color:var(--gold);}
+.nav-links{display:flex;gap:24px;align-items:center;}
+.nav-links a{
+  text-decoration:none;color:var(--muted);
+  font-weight:500;font-size:0.9rem;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--navy);}
+.nav-cta{
+  background:var(--navy);color:#fff;
+  padding:10px 22px;border-radius:8px;
+  text-decoration:none;font-weight:600;
+  font-size:0.88rem;transition:all 0.2s;
+  white-space:nowrap;
+}
+.nav-cta:hover{background:var(--navy-light);transform:translateY(-1px);}
+
+/* ── MOBILE BOTTOM NAV ───────────────────── */
+.mob-nav{
+  display:none;
+  position:fixed;bottom:0;width:100%;z-index:100;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(20px);
+  border-top:1px solid var(--border);
+  padding:10px 0 14px;
+  justify-content:space-around;
+}
+.mob-nav a{
+  display:flex;flex-direction:column;align-items:center;
+  gap:3px;text-decoration:none;
+  color:var(--muted);font-size:0.7rem;font-weight:600;
+}
+.mob-nav a i{font-size:1.15rem;transition:color 0.2s;}
+.mob-nav a.active,.mob-nav a:hover{color:var(--navy);}
+.mob-nav a.active i{color:var(--gold);}
+
+/* ── FLOATING WA ─────────────────────────── */
+.wa-btn{
+  position:fixed;right:20px;
+  width:56px;height:56px;
+  background:#25D366;color:#fff;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;text-decoration:none;
+  box-shadow:0 4px 20px rgba(37,211,102,0.4);
+  z-index:99;animation:waPulse 2.5s infinite;
+  transition:transform 0.2s;
+  bottom:80px;
+}
+.wa-btn:hover{transform:scale(1.1);}
+@keyframes waPulse{
+  0%{box-shadow:0 0 0 0 rgba(37,211,102,0.6);}
+  70%{box-shadow:0 0 0 18px rgba(37,211,102,0);}
+  100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}
+}
+
+/* ── HERO ────────────────────────────────── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:100px 20px 60px;
+  background:linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 55%, #1e4a8a 100%);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.15) 0%, transparent 65%);
+}
+.hero-logo{
+  width:110px;height:110px;border-radius:50%;
+  object-fit:cover;
+  border:3px solid rgba(201,168,76,0.5);
+  box-shadow:0 12px 40px rgba(0,0,0,0.3),0 0 0 6px rgba(201,168,76,0.1);
+  margin-bottom:24px;
+  animation:heroLogoIn 0.9s cubic-bezier(0.16,1,0.3,1) both,
+            heroFloat 4s ease-in-out infinite alternate 0.9s;
+  position:relative;z-index:1;
+}
+@keyframes heroLogoIn{
+  from{opacity:0;transform:scale(0.7) translateY(20px);}
+  to{opacity:1;transform:scale(1) translateY(0);}
+}
+@keyframes heroFloat{
+  from{transform:translateY(0);}
+  to{transform:translateY(-8px);}
+}
+.hero-label{
+  font-size:0.75rem;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--gold);
+  font-weight:700;margin-bottom:14px;
+  animation:fadeUp 0.8s ease 0.2s both;
+  position:relative;z-index:1;
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.6rem,7vw,5rem);
+  font-weight:700;color:#fff;
+  line-height:1.1;letter-spacing:-0.01em;
+  white-space:nowrap;
+  animation:fadeUp 0.8s ease 0.3s both;
+  position:relative;z-index:1;
+}
+/* Responsive: allow wrap on very small screens */
+@media(max-width:400px){.hero h1{white-space:normal;font-size:2.2rem;}}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 3s linear infinite;
+}
+@keyframes shine{to{background-position:200% center;}}
+.hero-sub{
+  font-size:clamp(0.95rem,2vw,1.1rem);
+  color:rgba(255,255,255,0.65);
+  max-width:500px;margin:20px auto 0;
+  font-weight:300;line-height:1.7;
+  animation:fadeUp 0.8s ease 0.4s both;
+  position:relative;z-index:1;
+}
+.hero-btns{
+  display:flex;gap:12px;justify-content:center;
+  flex-wrap:wrap;margin-top:32px;
+  animation:fadeUp 0.8s ease 0.5s both;
+  position:relative;z-index:1;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:8px;
+  text-decoration:none;font-weight:600;
+  font-size:0.95rem;transition:all 0.2s;
+  cursor:pointer;border:none;font-family:'Outfit',sans-serif;
+}
+.btn-primary{
+  background:var(--gold);color:var(--navy-dark);
+  box-shadow:0 6px 20px rgba(201,168,76,0.4);
+}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-outline{
+  border:1.5px solid rgba(255,255,255,0.3);
+  color:#fff;background:rgba(255,255,255,0.08);
+}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.btn-navy{background:var(--navy);color:#fff;}
+.btn-navy:hover{background:var(--navy-light);transform:translateY(-2px);}
+.btn-talk{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 32px;border-radius:8px;
+  background:var(--gold);color:var(--navy-dark);
+  font-weight:700;font-size:1rem;
+  text-decoration:none;
+  box-shadow:0 8px 24px rgba(201,168,76,0.35);
+  transition:all 0.2s;
+}
+.btn-talk:hover{background:var(--gold-light);transform:translateY(-2px);}
+
+.hero-divider{
+  position:absolute;bottom:-1px;left:0;right:0;height:50px;
+  background:linear-gradient(to bottom right,transparent 49.5%,var(--cream) 50%);
+}
+
+/* ── SECTIONS ────────────────────────────── */
+section{padding:72px 20px;}
+.container{max-width:1080px;margin:0 auto;}
+.sec-label{
+  font-size:0.72rem;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gold);
+  font-weight:700;margin-bottom:8px;
+}
+.sec-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.9rem,5vw,3rem);
+  font-weight:700;color:var(--navy);
+  line-height:1.15;margin-bottom:10px;
+}
+.sec-header{text-align:center;margin-bottom:48px;}
+
+/* ── CARDS ───────────────────────────────── */
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
+
+.card{
+  background:#fff;border-radius:14px;
+  padding:32px 26px;
+  border:1px solid rgba(27,58,107,0.07);
+  box-shadow:0 4px 20px var(--shadow-navy);
+  transition:all 0.3s ease;
+  position:relative;overflow:hidden;
+}
+.card::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--navy),var(--gold));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.3s;
+}
+.card:hover::after{transform:scaleX(1);}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 40px var(--shadow-navy);}
+.card-icon{
+  width:52px;height:52px;border-radius:12px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-light));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1.4rem;margin-bottom:18px;
+}
+.card h3{
+  font-size:1.15rem;font-weight:700;
+  color:var(--navy);margin-bottom:10px;
+}
+.card p{font-size:0.9rem;color:var(--muted);line-height:1.65;}
+
+/* Why cards */
+.why-card{border-left:3px solid var(--gold);border-radius:0 14px 14px 0;}
+.why-card .num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.5rem;font-weight:700;
+  color:rgba(201,168,76,0.25);
+  line-height:1;margin-bottom:8px;
+}
+
+/* Portfolio */
+.port-card{padding:0;overflow:hidden;}
+.port-top{
+  height:180px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;color:#fff;font-weight:700;
+  letter-spacing:0.04em;
+  background:linear-gradient(135deg,var(--navy-dark),var(--navy-light));
+}
+.port-top.tvs{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);}
+.port-body{padding:22px 24px;}
+.port-body h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.port-body p{font-size:0.88rem;color:var(--muted);margin-bottom:14px;line-height:1.6;}
+.port-link{
+  color:var(--gold);font-size:0.85rem;font-weight:700;
+  text-decoration:none;letter-spacing:0.05em;
+  display:inline-flex;align-items:center;gap:6px;
+  transition:gap 0.2s;
+}
+.port-link:hover{gap:10px;color:var(--navy);}
+
+/* Pricing */
+.price-card{text-align:center;padding:36px 28px;}
+.price-card.pop{
+  border:2px solid var(--gold);
+  background:linear-gradient(160deg,var(--gold-pale),#fff);
+  position:relative;
+  overflow:visible;
+  margin-top:16px;
+}
+.pop-badge{
+  position:absolute;top:-14px;left:50%;
+  transform:translateX(-50%);
+  background:var(--gold);color:var(--navy-dark);
+  font-size:0.68rem;font-weight:800;letter-spacing:0.15em;
+  padding:5px 16px;border-radius:20px;
+  white-space:nowrap;
+  box-shadow:0 4px 12px rgba(201,168,76,0.4);
+  z-index:10;
+}
+.price-name{
+  font-size:0.72rem;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--gold);
+  font-weight:700;margin-bottom:10px;
+}
+.price-amt{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem;font-weight:700;color:var(--navy);
+  line-height:1;margin:12px 0;
+}
+.price-amt sup{font-size:1.2rem;vertical-align:super;}
+.price-desc{font-size:0.85rem;color:var(--muted);margin-bottom:20px;}
+.price-list{list-style:none;text-align:left;margin-bottom:24px;}
+.price-list li{
+  font-size:0.88rem;color:var(--text);
+  padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.05);
+  display:flex;align-items:center;gap:8px;
+}
+.price-list li::before{content:'✓';color:var(--gold);font-weight:800;}
+.price-btn{
+  display:block;width:100%;padding:12px;
+  border-radius:8px;text-decoration:none;
+  font-weight:700;font-size:0.9rem;
+  transition:all 0.2s;cursor:pointer;border:none;
+  font-family:'Outfit',sans-serif;
+}
+.price-btn-outline{
+  background:transparent;
+  border:1.5px solid var(--navy);
+  color:var(--navy);
+}
+.price-btn-outline:hover{background:var(--navy);color:#fff;}
+.price-btn-solid{background:var(--navy);color:#fff;}
+.price-btn-solid:hover{background:var(--navy-light);}
+
+/* Contact section */
+.contact-box{
+  background:linear-gradient(160deg,var(--navy-dark),var(--navy));
+  border-radius:20px;padding:56px 32px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(14,32,71,0.25);
+  position:relative;overflow:hidden;
+}
+.contact-box::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,0.12) 0%,transparent 65%);
+}
+.contact-box .sec-title{color:#fff;position:relative;z-index:1;}
+.contact-box .sec-label{position:relative;z-index:1;}
+.contact-sub{
+  color:rgba(255,255,255,0.6);font-size:0.95rem;
+  max-width:440px;margin:14px auto 32px;
+  line-height:1.7;position:relative;z-index:1;
+}
+.contact-btns{
+  display:flex;gap:12px;justify-content:center;
+  flex-wrap:wrap;position:relative;z-index:1;
+  margin-bottom:36px;
+}
+.contact-info{
+  display:flex;gap:24px;justify-content:center;
+  flex-wrap:wrap;position:relative;z-index:1;
+}
+.contact-info a{
+  color:rgba(255,255,255,0.55);font-size:0.85rem;
+  text-decoration:none;transition:color 0.2s;
+  display:flex;align-items:center;gap:6px;
+}
+.contact-info a:hover{color:var(--gold);}
+
+/* Talk to Us sticky mobile bar */
+.talk-bar{
+  display:none;
+  position:fixed;bottom:64px;left:0;right:0;
+  padding:10px 16px;
+  background:var(--gold);
+  z-index:98;text-align:center;
+}
+.talk-bar a{
+  color:var(--navy-dark);font-weight:800;
+  font-size:1rem;text-decoration:none;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+
+/* Footer */
+footer{
+  background:#fff;border-top:1px solid rgba(27,58,107,0.08);
+  padding:48px 24px 24px;
+}
+.footer-grid{
+  max-width:1080px;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1.5fr;
+  gap:40px;margin-bottom:36px;
+}
+.footer-brand-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:700;color:var(--navy);
+  margin-bottom:8px;
+}
+.footer-brand-name span{color:var(--gold);}
+.footer-tagline{font-size:0.85rem;color:var(--muted);line-height:1.6;max-width:260px;}
+.footer-col-title{
+  font-size:0.8rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--navy);
+  font-weight:700;margin-bottom:14px;
+}
+.footer-links{display:flex;flex-direction:column;gap:10px;}
+.footer-links a{
+  color:var(--muted);text-decoration:none;
+  font-size:0.88rem;font-weight:500;transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--gold);}
+.footer-contact-list{display:flex;flex-direction:column;gap:10px;}
+.footer-contact-list a{
+  color:var(--muted);text-decoration:none;
+  font-size:0.88rem;font-weight:500;
+  display:flex;align-items:center;gap:8px;
+  transition:color 0.2s;
+}
+.footer-contact-list a:hover{color:var(--navy);}
+.footer-contact-list i{color:var(--gold);width:16px;}
+.footer-bottom{
+  text-align:center;padding-top:24px;
+  border-top:1px solid rgba(27,58,107,0.07);
+  font-size:0.82rem;color:var(--muted);
+}
+.footer-bottom span{color:var(--navy);font-weight:700;}
+
+/* Animations */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.reveal{
+  opacity:0;transform:translateY(32px);
+  transition:opacity 0.65s ease,transform 0.65s ease;
+}
+.reveal.on{opacity:1;transform:translateY(0);}
+.reveal.d1{transition-delay:0.1s;}
+.reveal.d2{transition-delay:0.2s;}
+.reveal.d3{transition-delay:0.3s;}
+
+/* ── MOBILE ──────────────────────────────── */
+@media(max-width:768px){
+  nav{padding:10px 16px;}
+  .nav-links{display:none;}
+  section{padding:56px 16px;}
+  .hero{padding:90px 16px 56px;}
+  .mob-nav{display:flex;}
+  .talk-bar{display:block;}
+  .wa-btn{bottom:130px;right:16px;width:50px;height:50px;font-size:1.4rem;}
+  footer{padding-bottom:140px;}
+  .footer-grid{grid-template-columns:1fr;gap:28px;text-align:center;}
+  .footer-tagline{margin:0 auto;}
+  .footer-contact-list a{justify-content:center;}
+  .footer-links{align-items:center;}
+}
+@media(max-width:480px){
+  .hero h1{font-size:2.2rem;white-space:normal;}
+  .grid-3,.grid-4{grid-template-columns:1fr;}
+  .price-card.pop{transform:none;}
+  .contact-btns{flex-direction:column;align-items:center;}
+  .contact-btns .btn{width:100%;justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup()">&#x2715;</button>
+    <img src="logo.webp" alt="RC's Anantha" class="popup-logo"/>
+    <h2>Welcome to RC's Anantha</h2>
+    <p>We craft premium digital solutions for SMEs who are ready to grow online.</p>
+    <button class="popup-btn" onclick="closePopup()">Explore Our Services</button>
+  </div>
+</div>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/919148529970?text=Hi,%20I%20want%20to%20talk%20to%20you%20about%20my%20business" class="wa-btn" target="_blank" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- TALK TO US BAR (mobile only) -->
+<div class="talk-bar">
+  <a href="https://wa.me/919148529970?text=Hi,%20I%20want%20to%20talk%20to%20you%20about%20my%20business" target="_blank">
+    <i class="fab fa-whatsapp"></i> Talk to Us &mdash; Free Consultation
+  </a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <img src="logo.webp" alt="Logo" class="nav-logo"/>
+    <div class="nav-name">RC's <span>Anantha</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#why">Why Us</a>
+    <a href="#portfolio">Work</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="https://wa.me/919148529970?text=Hi,%20I%20want%20a%20free%20consultation" class="nav-cta" target="_blank">Consult for Demo</a>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mob-nav">
+  <a href="#" class="active"><i class="fas fa-home"></i>Home</a>
+  <a href="#services"><i class="fas fa-layer-group"></i>Services</a>
+  <a href="#portfolio"><i class="fas fa-briefcase"></i>Work</a>
+  <a href="#pricing"><i class="fas fa-tags"></i>Pricing</a>
+  <a href="#contact"><i class="fas fa-phone"></i>Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="logo.webp" alt="RC's Anantha" class="hero-logo"/>
+  <div class="hero-label">Premier Digital Agency</div>
+  <h1>Design that Commands <em>Attention.</em></h1>
+  <p class="hero-sub">We build premium websites, robust apps & smart CRM systems for SMEs who refuse to be invisible online.</p>
+  <div class="hero-btns">
+    <a href="https://wa.me/919148529970?text=Hi,%20I%20want%20to%20talk%20to%20you%20about%20my%20business" class="btn btn-primary" target="_blank">
+      <i class="fab fa-whatsapp"></i> Talk to Us
+    </a>
+    <a href="#portfolio" class="btn btn-outline">View Our Work</a>
+  </div>
+  <div class="hero-divider"></div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background:var(--cream);">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">What We Do</div>
+      <div class="sec-title">Complete Digital Solutions</div>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal">
+        <div class="card-icon"><i class="fas fa-globe"></i></div>
+        <h3>Professional Websites</h3>
+        <p>Fast, mobile-ready websites that build instant trust and bring customers to your door &mdash; for any industry.</p>
+      </div>
+      <div class="card reveal d1">
+        <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+        <h3>Mobile Applications</h3>
+        <p>Custom apps for booking, ordering, staff management and customer tracking &mdash; built for your workflow.</p>
+      </div>
+      <div class="card reveal d2">
+        <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+        <h3>CRM & Business Software</h3>
+        <p>Smart dashboards, billing tools, WhatsApp automation &mdash; we automate the repetitive so you focus on growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why" style="background:#fff;">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">The Advantage</div>
+      <div class="sec-title">Why RC's Anantha?</div>
+    </div>
+    <div class="grid-4">
+      <div class="card why-card reveal">
+        <div class="num">01</div>
+        <h3>10 Years Business Experience</h3>
+        <p>Honda, Tata Motors EV, TVS &mdash; we understand what SMEs actually need beyond just technology.</p>
+      </div>
+      <div class="card why-card reveal d1">
+        <div class="num">02</div>
+        <h3>Fast Delivery</h3>
+        <p>Your website live in 7&ndash;15 days. No delays. No excuses. Quality delivered on time, every time.</p>
+      </div>
+      <div class="card why-card reveal d2">
+        <div class="num">03</div>
+        <h3>Any Industry</h3>
+        <p>Clinics, dealers, coaching centres, retail shops &mdash; we build solutions that fit your specific business.</p>
+      </div>
+      <div class="card why-card reveal d3">
+        <div class="num">04</div>
+        <h3>Ongoing Support</h3>
+        <p>We don't disappear after delivery. Updates, fixes, and guidance &mdash; always reachable, always there.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" style="background:var(--cream);">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">Our Work</div>
+      <div class="sec-title">Live Websites We Built</div>
+    </div>
+    <div class="grid-2">
+      <div class="card port-card reveal">
+        <div class="port-top">RRP Enterprises</div>
+        <div class="port-body">
+          <h3>RRP Enterprises</h3>
+          <p>Corporate website built for professional credibility and business-to-business trust.</p>
+          <a href="https://rrpenterprises.co.in" class="port-link" target="_blank">Visit Live Site <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="card port-card reveal d1">
+        <div class="port-top tvs">Tirumala TVS</div>
+        <div class="port-body">
+          <h3>Tirumala TVS</h3>
+          <p>Dealer website for inventory showcasing, service enquiries, and customer engagement.</p>
+          <a href="https://tirumaltvs.in" class="port-link" target="_blank">Visit Live Site <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background:#fff;">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">Packages</div>
+      <div class="sec-title">Simple. Transparent. Fair.</div>
+    </div>
+    <div class="grid-3">
+      <div class="card price-card reveal">
+        <div class="price-name">Starter</div>
+        <div class="price-amt"><sup>&#8377;</sup>3,999</div>
+        <div class="price-desc">Get your business online fast</div>
+        <ul class="price-list">
+          <li>1-Page Website</li>
+          <li>Mobile Responsive</li>
+          <li>WhatsApp Button</li>
+          <li>Google Maps Link</li>
+          <li>7-Day Delivery</li>
+        </ul>
+        <a href="https://wa.me/919148529970?text=I%20am%20interested%20in%20the%20Starter%20package" class="price-btn price-btn-outline" target="_blank">Get Started</a>
+      </div>
+      <div class="card price-card pop reveal d1">
+        <div class="pop-badge">MOST POPULAR</div>
+        <div class="price-name">Standard</div>
+        <div class="price-amt"><sup>&#8377;</sup>7,999</div>
+        <div class="price-desc">For businesses ready to grow online</div>
+        <ul class="price-list">
+          <li>3&ndash;5 Page Website</li>
+          <li>Contact & Lead Forms</li>
+          <li>WhatsApp Integration</li>
+          <li>Basic SEO Setup</li>
+          <li>10-Day Delivery</li>
+        </ul>
+        <a href="https://wa.me/919148529970?text=I%20am%20interested%20in%20the%20Standard%20package" class="price-btn price-btn-solid" target="_blank">Get Started</a>
+      </div>
+      <div class="card price-card reveal d2">
+        <div class="price-name">Growth</div>
+        <div class="price-amt"><sup>&#8377;</sup>12,999</div>
+        <div class="price-desc">Full digital presence + support</div>
+        <ul class="price-list">
+          <li>Complete Website</li>
+          <li>Advanced SEO</li>
+          <li>Google Business Setup</li>
+          <li>1 Month Support</li>
+          <li>15-Day Delivery</li>
+        </ul>
+        <a href="https://wa.me/919148529970?text=I%20am%20interested%20in%20the%20Growth%20package" class="price-btn price-btn-outline" target="_blank">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--cream);">
+  <div class="container reveal">
+    <div class="contact-box">
+      <div class="sec-label">Let's Talk</div>
+      <div class="sec-title">Ready to Go Digital?</div>
+      <p class="contact-sub">Book a free 15-minute consultation. No pressure, no jargon &mdash; just a clear plan for your business.</p>
+      <div class="contact-btns">
+        <a href="https://wa.me/919148529970?text=Hi,%20I%20want%20a%20free%20consultation" class="btn btn-primary" target="_blank">
+          <i class="fab fa-whatsapp"></i> Talk to Us
+        </a>
+        <a href="mailto:chandan@rcanantha.com" class="btn btn-outline">
+          <i class="far fa-envelope"></i> Send Email
+        </a>
+      </div>
+      <div class="contact-info">
+        <a href="tel:+919148529970"><i class="fas fa-phone"></i> +91 91485 29970</a>
+        <a href="mailto:chandan@rcanantha.com"><i class="far fa-envelope"></i> chandan@rcanantha.com</a>
+        <a href="https://instagram.com/rc_anantha" target="_blank"><i class="fab fa-instagram"></i> @rc_anantha</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">RC's <span>Anantha</span></div>
+      <div class="footer-tagline">We build complete digital solutions for businesses ready to grow online. Infinite Vision. Diverse Growth.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#why">Why Us</a>
+        <a href="#portfolio">Our Work</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact Us</div>
+      <div class="footer-contact-list">
+        <a href="tel:+919148529970"><i class="fas fa-phone"></i> +91 91485 29970</a>
+        <a href="mailto:chandan@rcanantha.com"><i class="far fa-envelope"></i> chandan@rcanantha.com</a>
+        <a href="https://instagram.com/rc_anantha" target="_blank"><i class="fab fa-instagram"></i> @rc_anantha</a>
+        <a href="https://wa.me/919148529970" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 <span>RC's Anantha</span> &mdash; All rights reserved.
+  </div>
+</footer>
+
+<script>
+// Popup
+function closePopup(){document.getElementById('popup').classList.remove('active');}
+window.addEventListener('load',()=>{
+  if(!sessionStorage.getItem('seen')){
+    setTimeout(()=>{document.getElementById('popup').classList.add('active');},1200);
+    sessionStorage.setItem('seen','1');
+  }
+});
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Mobile nav active
+document.querySelectorAll('.mob-nav a').forEach(a=>{
+  a.addEventListener('click',function(){
+    document.querySelectorAll('.mob-nav a').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
