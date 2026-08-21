@@ -406,7 +406,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .tech-section { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .tech-logos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
 .tech-item {
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
   padding: 26px 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -414,7 +414,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
 .tech-item:hover { border-color: rgba(31,216,255,0.35); transform: translateY(-3px); }
-.tech-item i { font-size: 1.6rem; color: var(--cyan); }
+.tech-item img { width: 38px; height: 38px; object-fit: contain; }
 .tech-item span { font-size: 0.78rem; color: var(--ink-mute); font-family: var(--ff-mono); }
 
 /* ---------------- CTA banner ---------------- */
