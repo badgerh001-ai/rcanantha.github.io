@@ -2,6 +2,19 @@
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
+// Brand-logo reliability fallback: if a CDN logo image fails to load
+// (network blip, ad-blocker, offline), replace it with the matching
+// Font Awesome icon so the page never shows a broken-image box.
+function iconFallback(img) {
+  if (img.dataset.fallbackApplied) return;
+  img.dataset.fallbackApplied = '1';
+  const faClass = img.getAttribute('data-fallback-fa');
+  if (!faClass) return;
+  const icon = document.createElement('i');
+  icon.className = faClass + ' brand-icon-fallback';
+  img.replaceWith(icon);
+}
+
 if (hamburger && mobileMenu) {
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
