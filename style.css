@@ -199,6 +199,35 @@ ul { list-style: none; margin: 0; padding: 0; }
 .glow-1 { background: var(--blue-deep); top: -180px; left: -120px; }
 .glow-2 { background: var(--cyan); bottom: -220px; right: -140px; }
 
+/* ---------------- Brand wave & dot-texture accents (from business card) ---------------- */
+.brand-wave { position: absolute; z-index: 0; pointer-events: none; }
+.wave-tl-1 { top: -20px; left: -20px; width: 240px; height: 240px; opacity: 0.28; }
+.wave-tl-2 { top: -20px; left: -20px; width: 240px; height: 240px; opacity: 0.18; }
+.wave-tl-1 path { fill: var(--blue-mid); }
+.wave-tl-2 path { fill: var(--cyan); }
+.wave-br-1 { bottom: -20px; right: -20px; width: 240px; height: 240px; opacity: 0.26; }
+.wave-br-2 { bottom: -20px; right: -20px; width: 240px; height: 240px; opacity: 0.18; }
+.wave-br-1 path { fill: var(--blue-deep); }
+.wave-br-2 path { fill: var(--cyan-soft); }
+.wave-about { top: -16px; left: -16px; width: 190px; height: 190px; opacity: 0.22; }
+.wave-about path { fill: var(--blue-mid); }
+
+.wave-cta { position: absolute; inset: auto 0 0 0; width: 100%; height: 120px; opacity: 0.35; }
+.wave-cta path { fill: var(--cyan); }
+
+.dot-texture {
+  position: absolute;
+  width: 220px; height: 220px;
+  background-image: radial-gradient(rgba(31,216,255,0.35) 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+  mask-image: radial-gradient(circle, black 40%, transparent 75%);
+  z-index: 0; pointer-events: none;
+}
+.corner-tl { top: 0; left: 0; }
+.corner-br { bottom: 0; right: 0; }
+
+.footer-legal { font-size: 0.74rem; color: var(--ink-mute); letter-spacing: 0.3px; margin-bottom: 8px; }
+
 .hero-inner { position: relative; z-index: 1; max-width: 880px; }
 .hero-title {
   font-family: var(--ff-display);
@@ -340,7 +369,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 /* ---------------- About ---------------- */
-.about { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.about { position: relative; overflow: hidden; background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.about-inner { position: relative; z-index: 1; }
 .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 .about-visual { position: relative; }
 .about-img-main { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/5; }
