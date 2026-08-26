@@ -495,11 +495,11 @@ ul { list-style: none; margin: 0; padding: 0; }
 .presence-badge { display: inline-flex; align-items: center; gap: 7px; font-family: var(--ff-mono); font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; margin-bottom: 14px; }
 .badge-hq { background: var(--gradient); color: #04060c; font-weight: 700; }
 .badge-branch { background: rgba(31,216,255,0.14); color: var(--cyan); border: 1px solid rgba(31,216,255,0.35); }
-.badge-remote { background: transparent; color: var(--ink-mute); border: 1px solid var(--line); }
+.badge-remote { background: rgba(183,190,219,0.12); color: var(--ink-dim); border: 1px solid rgba(255,255,255,0.22); font-weight: 600; }
 
 .presence-card.hq { border-color: rgba(31,216,255,0.4); box-shadow: 0 14px 40px -18px rgba(31,216,255,0.35); }
 .presence-card.branch { border-color: rgba(31,216,255,0.18); }
-.presence-card.remote { opacity: 0.92; }
+.presence-card.remote { border-color: rgba(255,255,255,0.16); opacity: 1; }
 
 /* ---------------- CTA banner ---------------- */
 .cta-banner { position: relative; overflow: hidden; }
@@ -638,6 +638,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   .process-line { display: none; }
   .tech-logos { grid-template-columns: repeat(3, 1fr); }
   .footer-inner { grid-template-columns: 1fr 1fr; }
+  .presence-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
 }
 
 @media (max-width: 720px) {
@@ -652,6 +653,9 @@ ul { list-style: none; margin: 0; padding: 0; }
   .about-img-accent { display: none; }
   .about-float-card { right: 0; }
   .section-inner { padding: 76px 22px; }
+  .presence-grid { grid-template-columns: 1fr; gap: 16px; }
+  .hero-location-strip { gap: 8px; }
+  .loc-pill { font-size: 0.66rem; padding: 6px 11px; }
 
   .mobile-tabbar { display: flex; }
   body { padding-bottom: 68px; }
