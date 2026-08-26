@@ -251,6 +251,26 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
+.hero-location-strip { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 0 0 28px; }
+.loc-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px;
+  border-radius: 100px;
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.3px;
+  border: 1px solid var(--line);
+  background: rgba(14, 19, 38, 0.6);
+  backdrop-filter: blur(6px);
+  color: var(--ink-dim);
+}
+.loc-pill i { font-size: 0.72rem; }
+.loc-pill-hq { border-color: rgba(31,216,255,0.4); color: var(--cyan-soft); }
+.loc-pill-hq i { color: var(--cyan); }
+.loc-pill-branch { color: var(--ink); }
+.loc-pill-branch i { color: var(--blue-mid); }
+.loc-pill-remote { color: var(--ink-mute); }
+
 .hero-scroll-hint {
   position: absolute;
   bottom: 32px;
@@ -295,6 +315,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .section-inner { max-width: 1240px; margin: 0 auto; padding: 110px 32px; }
 .tech-section .section-inner, .process .section-inner { padding-top: 90px; padding-bottom: 90px; }
 .section-header { max-width: 640px; margin: 0 0 56px; }
+.section-header.center { max-width: 640px; margin: 0 auto 56px; text-align: center; }
 .section-tag {
   display: inline-block;
   font-family: var(--ff-mono);
@@ -313,6 +334,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   letter-spacing: 0.4px;
 }
 .section-desc { color: var(--ink-dim); font-size: 1.02rem; max-width: 480px; }
+.section-desc.center { margin: 0 auto; }
 
 /* ---------------- Services ---------------- */
 .services { background: var(--bg); }
@@ -455,6 +477,29 @@ ul { list-style: none; margin: 0; padding: 0; }
 .brand-icon-fallback { font-size: inherit; }
 .footer-social a .brand-icon.icon-md { width: 18px; height: 18px; }
 .tab-item .brand-icon.icon-sm { width: 20px; height: 20px; }
+
+/* ---------------- Presence (Where We Operate) ---------------- */
+.presence { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.presence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.presence-card {
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.presence-card:hover { transform: translateY(-4px); }
+.presence-card h3 { font-size: 1.2rem; margin: 4px 0 10px; }
+.presence-card p { color: var(--ink-dim); font-size: 0.92rem; margin: 0; }
+
+.presence-badge { display: inline-flex; align-items: center; gap: 7px; font-family: var(--ff-mono); font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; margin-bottom: 14px; }
+.badge-hq { background: var(--gradient); color: #04060c; font-weight: 700; }
+.badge-branch { background: rgba(31,216,255,0.14); color: var(--cyan); border: 1px solid rgba(31,216,255,0.35); }
+.badge-remote { background: transparent; color: var(--ink-mute); border: 1px solid var(--line); }
+
+.presence-card.hq { border-color: rgba(31,216,255,0.4); box-shadow: 0 14px 40px -18px rgba(31,216,255,0.35); }
+.presence-card.branch { border-color: rgba(31,216,255,0.18); }
+.presence-card.remote { opacity: 0.92; }
 
 /* ---------------- CTA banner ---------------- */
 .cta-banner { position: relative; overflow: hidden; }
